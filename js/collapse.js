@@ -172,7 +172,11 @@
       if ($parent) {
         $parent.find('[data-toggle=collapse][data-parent="' + parent + '"]').not($this).each(function() {
           $(this).addClass('collapsed')
-          $($(this).attr('data-target')).collapse('hide')
+          $($(this).attr('data-target')).each(function() {
+            if (!$(this).hasClass('collapse')) {
+              $(this).collapse('hide')
+            }
+          });
         });
       }
       $this[$target.hasClass('in') ? 'addClass' : 'removeClass']('collapsed')
